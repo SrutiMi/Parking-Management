@@ -1,29 +1,51 @@
 #include<stdio.h>
+#include<stdlib.h>
+
+#include<time.h>
 int menu();
-int bus_entry();
-int car_entry();
-int cycle_entry();
-int bike_entry();
-int bus_exit();
-int car_exit();
-int cycle_exit();
-int bike_exit();
 int detail();
+void bus_entry();
+int bus_exit();
+void car_entry();
+int car_exit();
+void cycle_entry();
+int cycle_exit();
+void bike_entry();
+int bike_exit();
 int delete();
 int set_price();
 int capacity();
+void option();
+void re_access();
 
 int NumberOfCar=0, NumberOfBus=0, NumberOfCycle=0, amount=0, count=0, NumberOfBike=0;
 int PriceOfCar=0, PriceOfBus=0, PriceOfCycle=0, PriceofBike=0, CapacityOfCar=0, CapacityOfBus=0, CapacityOfCycle=0, CapacityOfBike=0;;
- int noCarIn=0,noBusIn=0, noCycleIn=0, noBikeIn=0;
-int main()
-{
-    set_price();
+int noCarIn=0,noBusIn=0, noCycleIn=0, noBikeIn=0;
+
+int main(){
+   
+    // set_price();
     capacity();
-    while(1)
-    {
-    switch(menu())
-    {
+    option();
+  
+    
+    return 0;
+}
+void re_access(){
+    int n;
+    printf("Do you want to re-access the menu :(0(No)/1(Yes)) : ");
+    scanf("%d",&n);
+    if(n==1){
+          option();
+    }
+}
+
+void option(){
+       int c=menu();
+       switch(c){
+        case 404:
+           printf("Exiting from the Garage");
+           exit(0);
         case 11:
             cycle_entry();
             break;
@@ -51,27 +73,43 @@ int main()
         case 5:
             detail();
             break;
-        defalt :
+        default :
             printf("\nwrong choice\n");
-    }
-    }
-    return 0;
+            option();
+      }
 }
+void delay(int milliseconds)
+{
+    long pause;
+    clock_t now,then;
 
+    pause = milliseconds*(CLOCKS_PER_SEC/1000);
+    now = then = clock();
+    while( (now-then) < pause )
+        now = clock();
+}
 int menu()
 {
     int ch;
-    printf("\nEnter Choice\n");
-    printf("\n11. Enter Cycle");
-    printf("\n10. Exit Cycle");
-    printf("\n21. Enter Bike");
-    printf("\n20. Exit Bike");
-    printf("\n31. Enter Car");
-    printf("\n30. Exit Car");
-    printf("\n41. Enter Bus");
-    printf("\n40. Exit Bus");
-    printf("\n5. Show data\n");
+    printf("\n************************************************************************\n");
+    printf("\t\tWelcome to  :\n");
+    printf("****************************************************************************\n");
+    printf("OUR SERVICES");
+    printf("\n11. Cycle Parking ");
+    printf("\n10. Removing Parked Cycle");
+    printf("\n21. Bike Parking");
+    printf("\n20. Removing Parked Bike");
+    printf("\n31. Car Parking");
+    printf("\n30. Removing Parked Car");
+    printf("\n41. Bus Parking");
+    printf("\n40. Removing Parked Bus");
+    printf("\n5. Show data");
+    printf("\n1.RATE CHART");//have to add that chart in the program
+    printf("\n404. Exit from the garage \n");
+    printf("\n**************************************************************************\n\n");
+    printf("\n Choose an option to avail our services :: ");
     scanf("%d",&ch);
+    printf("_______________________________________________________________________________\n");
     return(ch);
 }
 
@@ -95,8 +133,8 @@ int detail()
     printf("\nTotal amount gained = %d",amount); 
     return 0;
 }
-int bus_entry()
-{
+void bus_entry()
+{   
     if(noBusIn < CapacityOfBus)
     {
         noBusIn++;
@@ -109,10 +147,13 @@ int bus_entry()
     {
         printf("\n!!Capacity full!!\n");
     }
-    return 0;
+    delay(1000);
+    printf("\n_______________________________________________________________\n");
+    option();
+    
 }
 
-int car_entry()
+void car_entry()
 {
     if(noCarIn < CapacityOfCar)
     {
@@ -126,10 +167,13 @@ int car_entry()
     {
         printf("\n!!Capacity full!!\n");
     }
-    return 0;
+    delay(1000);
+    printf("\n_______________________________________________________________\n");
+
+    option();
 }
 
-int cycle_entry()
+void cycle_entry()
 {
     if (noCycleIn < CapacityOfCycle)
     {
@@ -143,10 +187,13 @@ int cycle_entry()
     {
        printf("\n!!Capacity full!!\n"); 
     }
-    return 0;
+    delay(1000);
+    printf("\n_______________________________________________________________\n");
+
+    option();
 }
 
-int bike_entry()
+void bike_entry()
 { 
     if(noBikeIn < CapacityOfBike)
     {
@@ -160,7 +207,10 @@ int bike_entry()
     {
        printf("\n!!Capacity full!!\n"); 
     }
-    return 0;
+    delay(1000);
+    printf("\n_______________________________________________________________\n");
+
+    option();
 }
 
 int set_price()
@@ -187,6 +237,7 @@ int bus_exit()
     {
         printf("No bus inside to exit!!\n");
     }
+    re_access();
     return 0;
 }
 int car_exit()
@@ -200,6 +251,7 @@ int car_exit()
     {
         printf("No car inside to exit!!\n");
     }
+    re_access();
     return 0;
 }
 int cycle_exit()
@@ -213,6 +265,7 @@ int cycle_exit()
     {
         printf("No cycle inside to exit!!\n");
     }
+    re_access();
     return 0;
 }
 int bike_exit()
@@ -226,8 +279,9 @@ int bike_exit()
     {
         printf("No bike inside to exit!!\n");
     }
+    re_access();
     return 0;
-    return 0;
+
 }
 
 int capacity()
@@ -243,3 +297,8 @@ int capacity()
     scanf("%d",&CapacityOfBus);
     return 0;
 }
+
+
+  
+
+
